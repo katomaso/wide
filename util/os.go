@@ -20,7 +20,6 @@ import (
 	"os"
 	"os/exec"
 	"os/user"
-	"path/filepath"
 	"runtime"
 	"strings"
 )
@@ -37,10 +36,9 @@ func (*myos) IsWindows() bool {
 
 // Pwd gets the path of current working directory.
 func (*myos) Pwd() string {
-	file, _ := exec.LookPath(os.Args[0])
-	pwd, _ := filepath.Abs(file)
+	pwd, _ := os.Getwd()
 
-	return filepath.Dir(pwd)
+	return pwd
 }
 
 // Home returns the home directory for the executing user.
